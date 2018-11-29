@@ -1,0 +1,16 @@
+﻿<Application x:Class="MapEditor.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MapEditor"
+             xmlns:vm="clr-namespace:MapEditor.ViewModels"
+             xmlns:vw="clr-namespace:MapEditor.Views"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <DataTemplate DataType="{x:Type vm:AlertDialogViewModel}">
+            <vw:AlertDialogView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:YesNoDialogViewModel}">
+            <vw:YesNoDialogView/>
+        </DataTemplate>
+    </Application.Resources>
+</Application>
