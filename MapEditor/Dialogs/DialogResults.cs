@@ -4,6 +4,8 @@
     {
         Undefined,
         Yes,
-        No
+        No,
+        OK,
+        Cancel
     }
 }

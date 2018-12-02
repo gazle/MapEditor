@@ -12,5 +12,8 @@
         <DataTemplate DataType="{x:Type vm:YesNoDialogViewModel}">
             <vw:YesNoDialogView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:NewMapDialogViewModel}">
+            <vw:NewMapDialogView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>

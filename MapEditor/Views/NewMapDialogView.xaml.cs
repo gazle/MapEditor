@@ -3,11 +3,11 @@
 namespace MapEditor.Views
 {
     /// <summary>
-    /// Interaction logic for AlertDialogView.xaml
+    /// Interaction logic for NewMapDialogView.xaml
     /// </summary>
-    public partial class AlertDialogView : UserControl
+    public partial class NewMapDialogView : UserControl
     {
-        public AlertDialogView()
+        public NewMapDialogView()
         {
             InitializeComponent();
         }

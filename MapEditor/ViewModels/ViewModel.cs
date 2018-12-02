@@ -1,8 +1,5 @@
 ﻿using MapEditor.Dialogs;
 using MapEditor.Models;
-using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -12,22 +9,24 @@ namespace MapEditor.ViewModels
 {
     class ViewModel : ViewModelBase
     {
-        //readonly IDialogService dialogService;
+        readonly IDialogService dialogService;
         readonly IFileDialogService fileDialogService;
         public ICommand YesNoCommand { get; private set; }
         public ICommand AlertCommand { get; private set; }
         public ICommand FileDialogCommand { get; private set; }
         public ICommand BlitCommand { get; private set; }
+        public ICommand NewMapCommand { get; private set; }
         public TileSheet TileSheet { get; set; } = new TileSheet();
         public TiledMap Map { get; set; } = new TiledMap();
         public WriteableBitmap Bitmap { get; set; }
 
         public ViewModel()
         {
-            //dialogService = new DialogService<Views.DialogWindow>();
+            dialogService = new DialogService<Views.DialogWindow>();
             fileDialogService = new FileDialogService<Views.FileDialogView>();
             FileDialogCommand = new DelegateCommand(FileDialog);
             BlitCommand = new DelegateCommand(Blit);
+            NewMapCommand = new DelegateCommand(NewMapDialog);
             Bitmap = new WriteableBitmap(Map.Width * TileSheet.TileWidth, Map.Height * TileSheet.TileHeight, 96, 96, PixelFormats.Bgra32, null);
         }
 
@@ -57,6 +56,12 @@ namespace MapEditor.ViewModels
         {
             var filename = fileDialogService.OpenFileDialog("");
             TileSheet.LoadFromFile(filename);
+        }
+
+        void NewMapDialog()
+        {
+            var dialog = new NewMapDialogViewModel();
+            var result = dialogService.OpenDialog(dialog);
         }
     }
 }

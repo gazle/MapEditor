@@ -2,6 +2,6 @@
 {
     interface IDialogService
     {
-        TResult OpenDialog<TResult>(DialogViewModelBase<TResult> viewModel);
+        DialogResults OpenDialog(DialogViewModelBase viewModel);
     }
 }

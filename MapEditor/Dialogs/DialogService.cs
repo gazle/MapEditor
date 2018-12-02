@@ -4,7 +4,7 @@ namespace MapEditor.Dialogs
 {
     class DialogService<TDialogWindow> : IDialogService where TDialogWindow : IDialogWindow
     {
-        public TResult OpenDialog<TResult>(DialogViewModelBase<TResult> viewModel)
+        public DialogResults OpenDialog(DialogViewModelBase viewModel)
         {
             var window = (IDialogWindow)Activator.CreateInstance(typeof(TDialogWindow));
             window.DataContext = viewModel ?? throw new ArgumentNullException(nameof(viewModel));

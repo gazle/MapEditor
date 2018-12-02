@@ -79,6 +79,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="TiledImageControl.cs" />
+    <Compile Include="ViewModels\NewMapDialogViewModel.cs" />
     <Compile Include="Views\AlertDialogView.xaml.cs">
       <DependentUpon>AlertDialogView.xaml</DependentUpon>
     </Compile>
@@ -86,6 +87,9 @@
     <Compile Include="Dialogs\DialogResults.cs" />
     <Compile Include="Dialogs\DialogService.cs" />
     <Compile Include="Views\FileDialogView.cs" />
+    <Compile Include="Views\NewMapDialogView.xaml.cs">
+      <DependentUpon>NewMapDialogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\YesNoDialogView.xaml.cs">
       <DependentUpon>YesNoDialogView.xaml</DependentUpon>
     </Compile>
@@ -108,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewMapDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

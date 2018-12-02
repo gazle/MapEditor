@@ -19,6 +19,7 @@
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top" FontSize="16">
             <MenuItem Header="_File">
+                <MenuItem Header="_New Map..." Command="{Binding NewMapCommand}"/>
                 <MenuItem Header="_Open..." Command="{Binding FileDialogCommand}"/>
                 <MenuItem Header="_Save..."/>
                 <Separator Height="20"/>
