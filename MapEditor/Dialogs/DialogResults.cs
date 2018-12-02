@@ -2,8 +2,8 @@
 {
     enum DialogResults
     {
-        Yes,
         Undefined,
+        Yes,
         No
     }
 }

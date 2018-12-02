@@ -67,12 +67,25 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DelegateCommand.cs" />
+    <Compile Include="Dialogs\FileDialogService.cs" />
+    <Compile Include="Dialogs\IFileDialogService.cs" />
+    <Compile Include="Dialogs\IFileDialogWindow.cs" />
+    <Compile Include="Models\TiledMap.cs" />
+    <Compile Include="Models\TileSheet.cs" />
+    <Compile Include="Models\TileSheetTile.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="TiledImageControl.cs" />
     <Compile Include="Views\AlertDialogView.xaml.cs">
       <DependentUpon>AlertDialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AlertDialogViewModel.cs" />
     <Compile Include="Dialogs\DialogResults.cs" />
     <Compile Include="Dialogs\DialogService.cs" />
+    <Compile Include="Views\FileDialogView.cs" />
     <Compile Include="Views\YesNoDialogView.xaml.cs">
       <DependentUpon>YesNoDialogView.xaml</DependentUpon>
     </Compile>
@@ -86,6 +99,10 @@
     <Compile Include="ValueConverters.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\AlertDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,6 +135,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
