@@ -78,7 +78,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="TiledImageControl.cs" />
+    <Compile Include="Controls\TiledImageControl.cs" />
     <Compile Include="ViewModels\NewMapDialogViewModel.cs" />
     <Compile Include="Views\AlertDialogView.xaml.cs">
       <DependentUpon>AlertDialogView.xaml</DependentUpon>

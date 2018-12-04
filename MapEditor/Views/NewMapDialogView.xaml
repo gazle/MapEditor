@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MapEditor.Views"
-             mc:Ignorable="d" 
-             Height="200" Width="300">
+             xmlns:local="clr-namespace:MapEditor"
+             mc:Ignorable="d"
+             Height="236" Width="318">
     <DockPanel>
         <Grid DockPanel.Dock="Bottom">
             <Grid.ColumnDefinitions>
@@ -16,10 +16,32 @@
             <Button Name="OKButton" Command="{Binding OKCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="OK" IsDefault="True" HorizontalAlignment="Center" Width="75" Margin="20" Padding="5"/>
             <Button Name="cancelButton" Command="{Binding CancelCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="Cancel" IsCancel="True" Grid.Column="1" HorizontalAlignment="Center" Width="75" Margin="20" Padding="5"/>
         </Grid>
+        <Grid DockPanel.Dock="Bottom">
+            <GroupBox Header="TileSheet Bitmap">
+                <DockPanel LastChildFill="True">
+                    <Button Content="Browse..." DockPanel.Dock="Right" HorizontalAlignment="Right" Padding="5" Click="Button_Click"/>
+                    <Border Background="Gray">
+                        <TextBlock Name="tbkFileName" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Border>
+                </DockPanel>
+            </GroupBox>
+        </Grid>
         <Grid>
             <Grid.Resources>
                 <Style TargetType="{x:Type DockPanel}">
                     <Setter Property="Margin" Value="6"/>
+                </Style>
+                <!--The tool tip for the TextBox to display the validation error message.-->
+                <Style TargetType="TextBox">
+                    <Setter Property="ToolTip" Value="No errors"/>
+                    <Setter Property="MaxLength" Value="8"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors).CurrentItem.ErrorContent}"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </Grid.Resources>
             <Grid.ColumnDefinitions>
@@ -29,27 +51,43 @@
             <GroupBox Header="Map size">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <DockPanel LastChildFill="False">
-                        <TextBlock DockPanel.Dock="Left" Text="Width:"/>
-                        <TextBox DockPanel.Dock="Right" Width="50"/>
+                        <TextBlock DockPanel.Dock="Left" Text="Width:" Padding="5"/>
+                        <TextBox DockPanel.Dock="Right" Width="50">
+                            <TextBox.Text>
+                                <Binding Path="MapWidth" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource" Converter="{x:Static local:StringToIntConverter.Instance}"/>
+                            </TextBox.Text>
+                        </TextBox>
                     </DockPanel>
                     <DockPanel LastChildFill="False">
-                        <TextBlock DockPanel.Dock="Left" Text="Height:"/>
-                        <TextBox DockPanel.Dock="Right" Width="50"/>
+                        <TextBlock DockPanel.Dock="Left" Text="Height:" Padding="5"/>
+                        <TextBox DockPanel.Dock="Right" Width="50">
+                            <TextBox.Text>
+                                <Binding Path="MapHeight" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource" Converter="{x:Static local:StringToIntConverter.Instance}"/>
+                            </TextBox.Text>
+                        </TextBox>
                     </DockPanel>
                 </StackPanel>
             </GroupBox>
             <GroupBox Grid.Column="1" Header="Tile size">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <DockPanel LastChildFill="False">
-                        <TextBlock DockPanel.Dock="Left" Text="Width:"/>
-                        <TextBox DockPanel.Dock="Right" Width="50"/>
+                        <TextBlock DockPanel.Dock="Left" Text="Width:" Padding="5"/>
+                        <TextBox Width="50" DockPanel.Dock="Right">
+                            <TextBox.Text>
+                                <Binding Path="TileWidth" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource" Converter="{x:Static local:StringToIntConverter.Instance}"/>
+                            </TextBox.Text>
+                        </TextBox>
                     </DockPanel>
                     <DockPanel LastChildFill="False">
-                        <TextBlock DockPanel.Dock="Left" Text="Height:"/>
-                        <TextBox DockPanel.Dock="Right" Width="50"/>
+                        <TextBlock DockPanel.Dock="Left" Text="Height:" Padding="5"/>
+                        <TextBox DockPanel.Dock="Right" Width="50">
+                            <TextBox.Text>
+                                <Binding Path="TileHeight" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" Mode="OneWayToSource" Converter="{x:Static local:StringToIntConverter.Instance}"/>
+                            </TextBox.Text>
+                        </TextBox>
                     </DockPanel>
                 </StackPanel>
             </GroupBox>
         </Grid>
-        </DockPanel>
+    </DockPanel>
 </UserControl>

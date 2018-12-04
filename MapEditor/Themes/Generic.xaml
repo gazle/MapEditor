@@ -1,12 +1,13 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:MapEditor.Controls"
     xmlns:local="clr-namespace:MapEditor">
 
-    <Style TargetType="{x:Type local:TiledImageControl}">
+    <Style TargetType="{x:Type controls:TiledImageControl}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:TiledImageControl}">
+                <ControlTemplate TargetType="{x:Type controls:TiledImageControl}">
                     <Viewbox>
                         <Canvas DataContext="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}" Background="Green"
                                 Width="{Binding Source.Bitmap.Width}" Height="{Binding Source.Bitmap.Height}">

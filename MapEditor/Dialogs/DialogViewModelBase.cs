@@ -15,32 +15,52 @@ namespace MapEditor.Dialogs
 
         public DialogViewModelBase(string title = "", string message = "")
         {
-            YesCommand = new DelegateCommand<IDialogWindow>(Yes);
-            NoCommand = new DelegateCommand<IDialogWindow>(No);
-            OKCommand = new DelegateCommand<IDialogWindow>(OK);
-            CancelCommand = new DelegateCommand<IDialogWindow>(Cancel);
+            YesCommand = new DelegateCommand<IDialogWindow>(Yes, CanYes);
+            NoCommand = new DelegateCommand<IDialogWindow>(No, CanNo);
+            OKCommand = new DelegateCommand<IDialogWindow>(OK, CanOK);
+            CancelCommand = new DelegateCommand<IDialogWindow>(Cancel, CanCancel);
             Title = title;
             Message = message;
         }
 
-        void Yes(IDialogWindow window)
+        protected virtual void Yes(IDialogWindow window)
         {
             CloseDialogWithResult(window, DialogResults.Yes);
         }
 
-        void No(IDialogWindow window)
+        protected virtual void No(IDialogWindow window)
         {
             CloseDialogWithResult(window, DialogResults.No);
         }
 
-        void OK(IDialogWindow window)
+        protected virtual void OK(IDialogWindow window)
         {
             CloseDialogWithResult(window, DialogResults.OK);
         }
 
-        void Cancel(IDialogWindow window)
+        protected virtual void Cancel(IDialogWindow window)
         {
             CloseDialogWithResult(window, DialogResults.Cancel);
+        }
+
+        protected virtual bool CanYes(IDialogWindow window)
+        {
+            return true;
+        }
+
+        protected virtual bool CanNo(IDialogWindow window)
+        {
+            return true;
+        }
+
+        protected virtual bool CanOK(IDialogWindow window)
+        {
+            return true;
+        }
+
+        protected virtual bool CanCancel(IDialogWindow window)
+        {
+            return true;
         }
 
         public void CloseDialogWithResult(IDialogWindow dialog, DialogResults result)

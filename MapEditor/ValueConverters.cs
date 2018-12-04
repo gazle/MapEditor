@@ -20,7 +20,7 @@ namespace MapEditor
     class CanvasLeftConverter : IMultiValueConverter
     {
         private CanvasLeftConverter() { }
-        public static CanvasLeftConverter Instance { get; private set; } = new CanvasLeftConverter();
+        public static CanvasLeftConverter Instance { get; } = new CanvasLeftConverter();
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
@@ -39,7 +39,7 @@ namespace MapEditor
     class CanvasTopConverter : IMultiValueConverter
     {
         private CanvasTopConverter() { }
-        public static CanvasTopConverter Instance { get; private set; } = new CanvasTopConverter();
+        public static CanvasTopConverter Instance { get; } = new CanvasTopConverter();
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
@@ -58,7 +58,7 @@ namespace MapEditor
     class CanvasRightConverter : IMultiValueConverter
     {
         private CanvasRightConverter() { }
-        public static CanvasRightConverter Instance { get; private set; } = new CanvasRightConverter();
+        public static CanvasRightConverter Instance { get; } = new CanvasRightConverter();
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
@@ -77,7 +77,7 @@ namespace MapEditor
     class CanvasBottomConverter : IMultiValueConverter
     {
         private CanvasBottomConverter() { }
-        public static CanvasBottomConverter Instance { get; private set; } = new CanvasBottomConverter();
+        public static CanvasBottomConverter Instance { get; } = new CanvasBottomConverter();
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
@@ -90,6 +90,26 @@ namespace MapEditor
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    class StringToIntConverter : IValueConverter
+    {
+        private StringToIntConverter() { }
+        public static StringToIntConverter Instance { get; } = new StringToIntConverter();
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string s = (string)value;
+            if (int.TryParse(s, out int result))
+                return result;
+            else
+                return -1;
         }
     }
 }

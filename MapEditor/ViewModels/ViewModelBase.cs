@@ -3,9 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace MapEditor.ViewModels
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    class ViewModelBase : INotifyPropertyChanged
     {
-        public bool IsChanged => throw new System.NotImplementedException();
+        //public bool IsChanged => throw new System.NotImplementedException();
 
         public event PropertyChangedEventHandler PropertyChanged;
 

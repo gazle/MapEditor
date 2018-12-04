@@ -8,5 +8,5 @@
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen"
         Title="{Binding Title}" Height="300" Width="300">
-    <ContentControl Name="ContentPresenter" Content="{Binding}"/>
+    <ContentControl Name="ContentPresenter" Content="{Binding}" IsTabStop="False"/>
 </Window>

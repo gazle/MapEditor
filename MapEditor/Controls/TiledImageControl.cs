@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Shapes;
 
-namespace MapEditor
+namespace MapEditor.Controls
 {
     [TemplatePart(Name = "PART_Image", Type = typeof(Image))]
     [TemplatePart(Name = "PART_Rectangle", Type = typeof(Rectangle))]
@@ -14,7 +14,6 @@ namespace MapEditor
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TiledImageControl), new FrameworkPropertyMetadata(typeof(TiledImageControl)));
         }
-
         // Using a DependencyProperty as the backing store for Source.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SourceProperty =
             DependencyProperty.Register("Source", typeof(TileSheet), typeof(TiledImageControl), new PropertyMetadata(null));
