@@ -8,28 +8,31 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:TiledImageControl}">
-                    <Viewbox>
-                        <Canvas DataContext="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}" Background="Green"
-                                Width="{Binding Source.Bitmap.Width}" Height="{Binding Source.Bitmap.Height}">
-                            <Image Name="PART_Image" Source="{Binding Path=Source.Bitmap}"/>
-                            <Rectangle Name="PART_Rectangle" Stroke="Red" StrokeThickness="2"
-                                   Width="{Binding Source.TileWidth}"
-                                   Height="{Binding Source.TileHeight}">
-                                <Canvas.Left>
-                                    <MultiBinding Converter="{x:Static local:CanvasLeftConverter.Instance}">
-                                        <Binding Path="SelectedColumn"/>
-                                        <Binding Path="Source.TileWidth"/>
-                                    </MultiBinding>
-                                </Canvas.Left>
-                                <Canvas.Top>
-                                    <MultiBinding Converter="{x:Static local:CanvasTopConverter.Instance}">
-                                        <Binding Path="SelectedRow"/>
-                                        <Binding Path="Source.TileHeight"/>
-                                    </MultiBinding>
-                                </Canvas.Top>
-                            </Rectangle>
-                        </Canvas>
-                    </Viewbox>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <Grid>
+                            <!--Cursor has to be scaled if we use a different Stretch mode on the image-->
+                            <Image Name="PART_Image" Source="{TemplateBinding Source}" Stretch="None"/>
+                            <Canvas Width="{Binding ActualWidth, ElementName=PART_Image}" Height="{Binding ActualHeight, ElementName=PART_Image}">
+                                <!--TemplateBinding doesn't work with properties on Freezables, wpf4u p437-->
+                                <Rectangle Name="PART_Cursor" Stroke="Red" StrokeThickness="2"
+                                       Width="{Binding CursorWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                                       Height="{Binding CursorHeight, RelativeSource={RelativeSource TemplatedParent}}">
+                                    <Canvas.Left>
+                                        <MultiBinding Converter="{x:Static local:MultiplyConverter.Instance}">
+                                            <Binding Path="CursorX" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="CursorWidth" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        </MultiBinding>
+                                    </Canvas.Left>
+                                    <Canvas.Top>
+                                        <MultiBinding Converter="{x:Static local:MultiplyConverter.Instance}">
+                                            <Binding Path="CursorY" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="CursorHeight" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        </MultiBinding>
+                                    </Canvas.Top>
+                                </Rectangle>
+                            </Canvas>
+                        </Grid>
+                    </ScrollViewer>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

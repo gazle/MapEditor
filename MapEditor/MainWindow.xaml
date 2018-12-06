@@ -6,15 +6,14 @@
         xmlns:local="clr-namespace:MapEditor"
         xmlns:controls="clr-namespace:MapEditor.Controls"
         xmlns:vm="clr-namespace:MapEditor.ViewModels"
+        xmlns:beh="clr-namespace:AttachedBehaviors"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Height="528.5"
         Title="MainWindow" Width="532.5">
     <Window.DataContext>
         <vm:ViewModel/>
     </Window.DataContext>
-    <Window.Resources>
-        <local:SampleConverter x:Key="SampleConverter" />
-    </Window.Resources>
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top" FontSize="16">
             <MenuItem Header="_File">
@@ -44,9 +43,12 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <Image Source="{Binding MapRepresentation}" Stretch="None" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Image x:Name="MapImage" Source="{Binding MapRepresentation}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       beh:Behavior.PlaceTileCommand="{Binding PlaceTileCommand}" beh:Behavior.PlaceTileCommandParameter="{Binding SelectedTileNumber, ElementName=Tic}">
+                </Image>
             </ScrollViewer>
-            <controls:TiledImageControl Background="Yellow" Grid.Column="2" Source="{Binding Map.TileSheet}"/>
+            <controls:TiledImageControl x:Name="Tic" Background="Yellow" Grid.Column="2" Source="{Binding Map.TileSheet.Bitmap}"
+                                        CursorWidth="{Binding Map.TileSheet.TileWidth}" CursorHeight="{Binding Map.TileSheet.TileHeight}"/>
             <GridSplitter Background="Bisque" HorizontalAlignment="Stretch" Grid.Column="1"/>
         </Grid>
     </DockPanel>

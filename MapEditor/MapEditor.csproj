@@ -66,6 +66,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AttachedBehaviors\EventToCommand.cs" />
+    <Compile Include="AttachedBehaviors\PlaceTileBehavior.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="Dialogs\FileDialogService.cs" />
     <Compile Include="Dialogs\IFileDialogService.cs" />
@@ -160,5 +162,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

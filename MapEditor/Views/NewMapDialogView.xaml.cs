@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -40,15 +41,29 @@ namespace MapEditor.Views
             bool? result = fileDialog.ShowDialog();
             if (result == true)
             {
+                BitmapImage bitmap = new BitmapImage();
                 try
                 {
-                    Bitmap = new BitmapImage(new Uri(fileDialog.FileName));
+                    // https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.imaging.bitmapimage.cacheoption?view=netframework-4.7.2
+                    // Remarks: "Set the CacheOption to BitmapCacheOption.OnLoad if you wish to close a stream used to create the BitmapImage."
+                    bitmap.BeginInit();
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;              // Might have to review this eg. is the cache ever refreshed?
+                    bitmap.StreamSource = File.OpenRead(fileDialog.FileName);
+                    bitmap.EndInit();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                     return;
                 }
+                finally
+                {
+                    // Attempt to close the stream whatever happens otherwise the app keeps a handle on the file even if there was an excepion
+                    // CacheOption = OnLoad => image was cached into memory at initialization
+                    bitmap.StreamSource?.Close();
+                }
+                // Success
+                Bitmap = bitmap;
                 tbkFileName.Text = fileDialog.FileName;
             }
         }

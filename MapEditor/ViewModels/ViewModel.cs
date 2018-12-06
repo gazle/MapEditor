@@ -16,6 +16,7 @@ namespace MapEditor.ViewModels
         public ICommand AlertCommand { get; private set; }
         public ICommand FileDialogCommand { get; private set; }
         public ICommand NewMapCommand { get; private set; }
+        public ICommand PlaceTileCommand { get; private set; }
         TiledMap map;
         public TiledMap Map { get { return map; } set { SetField(ref map, value); } }
         WriteableBitmap mapRepresentation;
@@ -29,6 +30,7 @@ namespace MapEditor.ViewModels
 
             FileDialogCommand = new DelegateCommand(FileDialog);
             NewMapCommand = new DelegateCommand(NewMapDialog);
+            PlaceTileCommand = new DelegateCommand<object>(PlaceTile);
         }
 
         public void BlitTile(BitmapImage sourceBitmap, WriteableBitmap targetBitmap, Int32Rect sourceRect, Int32Rect targetRect)
@@ -72,6 +74,14 @@ namespace MapEditor.ViewModels
                     BlitTile(Map.TileSheet.Bitmap, MapRepresentation, sourceRect, targetRect);
                 }
             }
+        }
+
+        void PlaceTile(object args)
+        {
+            var tuple = ((Point pos, int tile))args;
+            Point pos = tuple.pos;
+            int tileNumber = tuple.tile;
+            map.TileSheet.BlitTile(tileNumber, mapRepresentation, (int)pos.X, (int)pos.Y);
         }
     }
 }

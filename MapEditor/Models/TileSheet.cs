@@ -28,6 +28,23 @@ namespace MapEditor.Models
             TileHeight = tileHeight;
         }
 
+        public void BlitTile(int tileNumber, WriteableBitmap targetBitmap, int x, int y)
+        {
+            int stride = (TileWidth * bitmap.Format.BitsPerPixel + 7) / 8;
+            byte[] data = new byte[TileHeight * stride];
+            Int32Rect rect = GetRectangleFromTileNumber(tileNumber);
+            bitmap.CopyPixels(rect, data, stride, 0);
+            rect.X = x;
+            rect.Y = y;
+            if (rect.X >= 0 && rect.X + rect.Width <= targetBitmap.Width && rect.Y >= 0 && rect.Y + rect.Height <= targetBitmap.Height)
+            {
+                targetBitmap.Lock();
+                targetBitmap.WritePixels(rect, data, stride, 0);
+                targetBitmap.AddDirtyRect(rect);
+                targetBitmap.Unlock();
+            }
+        }
+
         public Int32Rect GetRectangleFromTileNumber(int tileNumber)
         {
             if (tileNumber < 0 || tileNumber > TotalNumberOfTiles)
